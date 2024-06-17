@@ -55,5 +55,4 @@ def create_commendation(school_kid, subject_title):
                                 created=last_lesson.date,
                                 subject_id=last_lesson.subject.id,
                                 teacher_id=random_teacher_id)
-
     return random_commendation
