@@ -17,12 +17,8 @@ def replace_bad_marks(school_kid):
     schoolkid = get_schoolkid(school_kid)
     if not schoolkid:
         return
-    bad_marks = Mark.objects.filter(schoolkid_id=schoolkid.id, points__in=[2, 3])
-    good_mark_points = random.randint(4, 5)
-    for bad_mark in bad_marks:
-        bad_mark.points = good_mark_points
-        bad_mark.save()
-    return bad_marks.count()
+    Mark.objects.filter(schoolkid_id=schoolkid.id, points__in=[2, 3]).update(points=5)
+    return 'Теперь ученик - круглый отличник'
 
 
 def delete_chastisements(school_kid):
@@ -31,7 +27,7 @@ def delete_chastisements(school_kid):
         return
     chastisements = Chastisement.objects.filter(schoolkid_id=schoolkid.id)
     chastisements.delete()
-    return chastisements.count()
+    return 'Все замечания удалены'
 
 
 def create_commendation(school_kid, subject_title):
