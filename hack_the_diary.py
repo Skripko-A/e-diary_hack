@@ -2,6 +2,15 @@ import random
 
 from datacenter.models import Schoolkid, Mark, Chastisement, Teacher, Lesson, Commendation
 
+COMMENDATIONS = (
+    'Молодец', 'Отлично', 'Хорошо', 'Гораздо лучше, чем я ожидал', 'Ты меня приятно удивил', 'Великолепно', 'Прекрасно',
+    'Ты меня очень обрадовал', 'Именно этого я давно ждал от тебя', 'Сказано здорово – просто и ясно',
+    'Ты, как всегда, точен', 'Очень хороший ответ', 'Талантливо', 'Ты сегодня прыгнул выше головы', 'Я поражен',
+    'Уже существенно лучше', 'Потрясающе', 'Замечательно', 'Прекрасное начало', 'Так держать', 'Ты на верном пути',
+    'Здорово', 'Это как раз то, что нужно', 'Я тобой горжусь', 'С каждым разом у тебя получается всё лучше',
+    'Мы с тобой не зря поработали', 'Я вижу, как ты стараешься', 'Ты растешь над собой', 'Ты многое сделал, я это вижу',
+    'Теперь у тебя точно все получится!')
+
 
 def get_schoolkid(school_kid):
     try:
@@ -31,12 +40,7 @@ def delete_chastisements(school_kid):
 
 
 def create_commendation(school_kid, subject_title):
-    commendations = open('commendation_texts.txt', 'r').read()
-    while '  ' in commendations:
-        commendations = commendations.replace('  ', ' ')
-    commendations = commendations.replace('\n', '')
-    commendations = tuple(commendations.split(sep='!, '))
-    random_commendation = random.choice(commendations)
+    random_commendation = random.choice(COMMENDATIONS)
     schoolkid = get_schoolkid(school_kid)
     if not schoolkid:
         return
@@ -54,5 +58,3 @@ def create_commendation(school_kid, subject_title):
     except AttributeError:
         return 'Уточните название предмета'
     return random_commendation
-
-
