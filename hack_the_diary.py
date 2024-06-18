@@ -49,7 +49,6 @@ def create_commendation(school_kid, subject_title):
                                             year_of_study=schoolkid.year_of_study,
                                             subject__title=subject_title).last()
         teacher_id = last_lesson.teacher_id
-
         Commendation.objects.create(text=random_commendation,
                                     schoolkid_id=schoolkid.id,
                                     created=last_lesson.date,
